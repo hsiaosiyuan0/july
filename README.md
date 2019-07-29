@@ -2,7 +2,9 @@
 
 Yet another template engine, it can be used as an alternative solution of [JSX](https://github.com/facebook/jsx).
 
-<center><img src="packages/vscode/screenshot.png" width="500"></center>
+<p align="center">
+<img src="packages/vscode/screenshot.png" width="500">
+</p>
 
 It's inspired by [Pug](https://github.com/pugjs/pug) and JSX to provide more clean and flexible syntax.
 
