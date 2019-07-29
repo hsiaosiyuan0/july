@@ -1,0 +1,49 @@
+{
+  "name": "july",
+  "displayName": "july",
+  "description": "Add VSCode support for July - Yet another simple template language",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.36.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "july",
+        "aliases": [
+          "july",
+          "july"
+        ],
+        "extensions": [
+          "jul"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "july",
+        "scopeName": "source.july",
+        "path": "./syntaxes/july.tmLanguage.json"
+      },
+      {
+        "injectTo": [
+          "source.js",
+          "source.js.jsx",
+          "source.jsx",
+          "source.ts",
+          "source.tsx"
+        ],
+        "scopeName": "july.injection",
+        "path": "./syntaxes/july-injection.json",
+        "embeddedLanguages": {
+          "meta.template.expression.ts": "typescript",
+          "meta.template.expression.js": "javascript"
+        }
+      }
+    ]
+  }
+}
