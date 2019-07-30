@@ -15,30 +15,31 @@ test(`id and keyword`, () => {
 
   const lexer = newLexer(code);
   let tok = lexer.next();
-  expect(tok.type).toBe(TokKind.Identifier);
+  expect(tok.kind).toBe(TokKind.Identifier);
   expect(tok.value).toBe("div");
   expect(tok.isFirstTokInLine).toBeTruthy();
+  expect(lexer.isNewlineAhead).toBeTruthy();
   expect(tok.prevSpaceCount).toBe(2);
 
   tok = lexer.next();
-  expect(tok.type).toBe(TokKind.Keyword);
+  expect(tok.kind).toBe(TokKind.Keyword);
   expect(tok.value).toBe("if");
   expect(tok.isFirstTokInLine).toBeTruthy();
   expect(tok.prevSpaceCount).toBe(4);
 
   tok = lexer.next();
-  expect(tok.type).toBe(TokKind.Bool);
+  expect(tok.kind).toBe(TokKind.Bool);
   expect(tok.value).toBe("true");
 
   tok = lexer.next();
-  expect(tok.type).toBe(TokKind.Bool);
+  expect(tok.kind).toBe(TokKind.Bool);
   expect(tok.value).toBe("false");
 
   tok = lexer.next();
-  expect(tok.type).toBe(TokKind.Null);
+  expect(tok.kind).toBe(TokKind.Null);
 
   tok = lexer.next();
-  expect(tok.type).toBe(TokKind.Undef);
+  expect(tok.kind).toBe(TokKind.Undef);
 });
 
 test("number", () => {
@@ -48,35 +49,35 @@ test("number", () => {
 
   const lexer = newLexer(code);
   let tok = lexer.next();
-  expect(tok.type).toBe(TokKind.Number);
+  expect(tok.kind).toBe(TokKind.Number);
   expect(tok.value).toBe("1");
 
   tok = lexer.next();
-  expect(tok.type).toBe(TokKind.Number);
+  expect(tok.kind).toBe(TokKind.Number);
   expect(tok.value).toBe("0.");
 
   tok = lexer.next();
-  expect(tok.type).toBe(TokKind.Number);
+  expect(tok.kind).toBe(TokKind.Number);
   expect(tok.value).toBe("1.0");
 
   tok = lexer.next();
-  expect(tok.type).toBe(TokKind.Number);
+  expect(tok.kind).toBe(TokKind.Number);
   expect(tok.value).toBe("1e1");
 
   tok = lexer.next();
-  expect(tok.type).toBe(TokKind.Number);
+  expect(tok.kind).toBe(TokKind.Number);
   expect(tok.value).toBe("1e-1");
 
   tok = lexer.next();
-  expect(tok.type).toBe(TokKind.Number);
+  expect(tok.kind).toBe(TokKind.Number);
   expect(tok.value).toBe("1e+10");
 
   tok = lexer.next();
-  expect(tok.type).toBe(TokKind.Sign);
+  expect(tok.kind).toBe(TokKind.Sign);
   expect(tok.value).toBe("-");
 
   tok = lexer.next();
-  expect(tok.type).toBe(TokKind.Number);
+  expect(tok.kind).toBe(TokKind.Number);
   expect(tok.value).toBe("1");
 });
 
@@ -87,23 +88,23 @@ test("string", () => {
 
   const lexer = newLexer(code);
   let tok = lexer.next();
-  expect(tok.type).toBe(TokKind.String);
+  expect(tok.kind).toBe(TokKind.String);
   expect(tok.value).toBe("str");
 
   tok = lexer.next();
-  expect(tok.type).toBe(TokKind.String);
+  expect(tok.kind).toBe(TokKind.String);
   expect(tok.value).toBe("str");
 
   tok = lexer.next();
-  expect(tok.type).toBe(TokKind.String);
+  expect(tok.kind).toBe(TokKind.String);
   expect(tok.value).toBe("str\\n");
 
   tok = lexer.next();
-  expect(tok.type).toBe(TokKind.String);
+  expect(tok.kind).toBe(TokKind.String);
   expect(tok.value).toBe("\\u1F600");
 
   tok = lexer.next();
-  expect(tok.type).toBe(TokKind.String);
+  expect(tok.kind).toBe(TokKind.String);
   expect(tok.value).toBe("\\x61");
 });
 
@@ -114,26 +115,26 @@ test("sign", () => {
 
   const lexer = newLexer(code);
   let tok = lexer.next();
-  expect(tok.type).toBe(TokKind.Sign);
+  expect(tok.kind).toBe(TokKind.Sign);
   expect(tok.value).toBe("=");
 
   tok = lexer.next();
-  expect(tok.type).toBe(TokKind.Sign);
+  expect(tok.kind).toBe(TokKind.Sign);
   expect(tok.value).toBe(">=");
 
   tok = lexer.next();
-  expect(tok.type).toBe(TokKind.Sign);
+  expect(tok.kind).toBe(TokKind.Sign);
   expect(tok.value).toBe("<=");
 
   tok = lexer.next();
-  expect(tok.type).toBe(TokKind.Sign);
+  expect(tok.kind).toBe(TokKind.Sign);
   expect(tok.value).toBe("+");
 
   tok = lexer.next();
-  expect(tok.type).toBe(TokKind.Sign);
+  expect(tok.kind).toBe(TokKind.Sign);
   expect(tok.value).toBe("-");
 
   tok = lexer.next();
-  expect(tok.type).toBe(TokKind.Sign);
+  expect(tok.kind).toBe(TokKind.Sign);
   expect(tok.value).toBe("&&");
 });

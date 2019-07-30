@@ -5,11 +5,13 @@ export class Lexer {
   src: Source;
   prevSpaceCount: number;
   isFirstTokInLine: boolean;
+  isNewlineAhead: boolean;
 
   constructor(src: Source) {
     this.src = src;
     this.prevSpaceCount = 0;
     this.isFirstTokInLine = false;
+    this.isNewlineAhead = false;
   }
 
   get pos() {
@@ -31,8 +33,36 @@ export class Lexer {
     return this.readSign();
   }
 
+  peek(): Token {
+    this.src.pushPos();
+    const tok = this.next();
+    this.src.restorePos();
+    return tok;
+  }
+
   aheadIsEos() {
     return EOF === this.src.peek();
+  }
+
+  updateIsNewlineAhead() {
+    this.src.pushPos();
+    while (true) {
+      let c = this.src.peek();
+      if (isSpace(c)) {
+        this.src.read();
+      } else if (isNewline(c) || c === EOF) {
+        this.src.read();
+        this.isNewlineAhead = true;
+        break;
+      } else if (c === "/") {
+        this.skipComment();
+      } else if (c === "\t") {
+        this.src.read();
+      } else {
+        break;
+      }
+    }
+    this.src.restorePos();
   }
 
   finTok(tok: Token) {
@@ -41,6 +71,8 @@ export class Lexer {
     tok.isFirstTokInLine = this.isFirstTokInLine;
     this.prevSpaceCount = 0;
     this.isFirstTokInLine = false;
+    this.isNewlineAhead = false;
+    this.updateIsNewlineAhead();
     return tok;
   }
 

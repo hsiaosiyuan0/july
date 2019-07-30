@@ -105,4 +105,8 @@ export class SourceLoc {
     this.start = start;
     this.end = end;
   }
+
+  clone() {
+    return Object.assign({}, this);
+  }
 }

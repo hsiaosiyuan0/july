@@ -18,6 +18,7 @@ export class Sign {
   static Star = "*";
   static Slash = "/";
   static Modulo = "%";
+  static Pow = "**";
   static LE = "<=";
   static GE = ">=";
   static LT = "<";
@@ -40,21 +41,51 @@ export class Sign {
   static Assign = "=";
 }
 
+const precedence = new Map(
+  Object.entries({
+    "**": 15,
+    "+": 13,
+    "-": 13,
+    "*": 14,
+    "/": 14,
+    "%": 14,
+    "<=": 11,
+    ">=": 11,
+    "<": 11,
+    ">": 11,
+    "==": 10,
+    "!=": 10,
+    "&&": 6,
+    "||": 5
+  })
+);
+export function pcd(s: string) {
+  if (precedence.has(s)) return precedence.get(s)!;
+  return -1;
+}
+export function isAssocR(s: string) {
+  return s === "**";
+}
+export function isBin(s: string) {
+  return precedence.has(s);
+}
+
 export class Keyword {
   static If = "if";
   static Elf = "elf";
   static For = "for";
+  static In = "in";
   static Else = "else";
 }
 
-const keywords = new Set(["if", "elf", "for", "else"]);
+const keywords = new Set(["if", "elf", "for", "in", "else"]);
 export function isKeyword(id: string) {
   return keywords.has(id);
 }
 
 // prettier-ignore
 const sign1 = new Set(['+', '-', '*', '/', '%', '<', '>', '=', '(', ')', '{','}', '[', ']', '?', ":", ',', '.', '!']);
-const sign2 = new Set(["<=", ">=", "==", "!=", "&&", "||"]);
+const sign2 = new Set(["**", "<=", ">=", "==", "!=", "&&", "||"]);
 export function isSign1(c: string) {
   return sign1.has(c);
 }
@@ -63,18 +94,54 @@ export function isSign2(c: string) {
 }
 
 export class Token {
-  type: TokKind;
+  kind: TokKind;
   loc: SourceLoc;
   prevSpaceCount: number;
   isFirstTokInLine: boolean;
   value: string;
 
-  constructor(type: TokKind, loc: SourceLoc) {
-    this.type = type;
+  constructor(kind: TokKind, loc: SourceLoc) {
+    this.kind = kind;
     this.loc = loc;
     this.prevSpaceCount = 0;
     this.isFirstTokInLine = false;
     this.value = "";
+  }
+
+  matchSign(s: string) {
+    return this.kind === TokKind.Sign && this.value === s;
+  }
+
+  matchKeyword(k: string) {
+    return this.kind === TokKind.Keyword && this.value === k;
+  }
+
+  isBinOP() {
+    return this.isSign() && isBin(this.value);
+  }
+
+  pcd() {
+    return pcd(this.value);
+  }
+
+  isAssocR() {
+    return this.isBinOP() && isAssocR(this.value);
+  }
+
+  isStr() {
+    return this.kind === TokKind.String;
+  }
+
+  isId() {
+    return this.kind === TokKind.Identifier;
+  }
+
+  isSign() {
+    return this.kind === TokKind.Sign;
+  }
+
+  isKeyword() {
+    return this.kind === TokKind.Keyword;
   }
 
   static newId(loc: SourceLoc, value: string) {
