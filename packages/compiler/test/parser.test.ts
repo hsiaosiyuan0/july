@@ -1,6 +1,5 @@
 import { Source, Lexer } from "../src/lexer";
 import { Parser } from "../src/parser";
-import util from "util";
 
 function newParser(code: string) {
   const src = new Source(code);
@@ -80,6 +79,5 @@ else
   `;
 
   const parser = newParser(code);
-  const node = parser.parseForStmt();
-  console.dir(util.inspect(node, true, null));
+  parser.parseForStmt();
 });

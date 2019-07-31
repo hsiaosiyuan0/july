@@ -20,10 +20,8 @@ import {
   TextTagStatement,
   Prog,
   IfStatement,
-  Statement,
   BlockStatement,
-  ForStatement,
-  NodeType
+  ForStatement
 } from "./ast";
 
 export class Parser {
@@ -195,11 +193,16 @@ export class Parser {
     return this.finNode(node);
   }
 
+  aheadIsEos() {
+    const tok = this.lexer.peek();
+    return tok.kind === TokKind.EOS;
+  }
+
   parseProg() {
     const loc = this.lexer.loc;
     const node = new Prog(loc, []);
     while (true) {
-      if (this.lexer.aheadIsEos()) break;
+      if (this.aheadIsEos()) break;
       node.body.push(this.parseStmt());
     }
     return this.finNode(node);
