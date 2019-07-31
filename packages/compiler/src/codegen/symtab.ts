@@ -26,7 +26,7 @@ import {
 export type Scope = Set<string>;
 export type BindingResolver = (id: string) => boolean;
 
-// not only build all the symbol tables but also check whether the bindings are valid
+// not only build the symbol table but also check whether the bindings are valid
 export class Symtab extends AstVisitor {
   i: number;
   scopes: Map<number, Scope>;
