@@ -1,11 +1,4 @@
-import {
-  Codegen,
-  Symtab,
-  Parser,
-  Source,
-  Lexer,
-  BindingResolver
-} from "july-compiler";
+import { Codegen, Symtab, Parser, Source, Lexer, BindingResolver } from "july";
 import types from "@babel/types";
 import babel from "@babel/core";
 import template from "@babel/template";

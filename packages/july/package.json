@@ -1,7 +1,7 @@
 {
-  "name": "july-compiler",
+  "name": "july",
   "version": "1.0.0",
-  "description": "Compiler for July",
+  "description": "July - A simple and flexible template language",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
@@ -34,7 +34,8 @@
   "dependencies": {
     "@babel/generator": "^7.5.5",
     "@babel/template": "^7.4.4",
-    "@babel/types": "^7.5.5"
+    "@babel/types": "^7.5.5",
+    "@types/react-dom": "^16.8.5"
   },
   "files": [
     "src/",

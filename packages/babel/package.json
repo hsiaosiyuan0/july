@@ -33,7 +33,7 @@
   "dependencies": {
     "@babel/template": "^7.4.4",
     "@babel/types": "^7.5.5",
-    "july-compiler": "^1.0.0"
+    "july": "^1.0.0"
   },
   "files": [
     "src/",
