@@ -22,4 +22,4 @@ The nature of this problem is that if the XML-like syntax is well-formatted, tho
 
 JSX does not include the `for` and `if` statements, despite there maybe deep meaning behind this behavior, control flows are flexible and useful at sometimes. July provides them out-of-box.
  
-It's in development, stay tuned.
+It's in development, stay tuned. [Early viewing](packages/demo-with-react/README.md)
