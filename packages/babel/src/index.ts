@@ -30,12 +30,16 @@ export default function(b: Context) {
 
         const code = path.node.quasi.quasis[0].value.raw;
         path.replaceWith(compile(code, name => path.scope.hasBinding(name)));
-
         importJuly = true;
       },
       Program: {
         exit(path: babel.NodePath<types.Program>) {
           if (!importJuly) return;
+
+          if (!path.scope.hasBinding("React")) {
+            const fn = template`import * as React from "react";`;
+            (path as any).unshiftContainer("body", fn());
+          }
 
           const fn = template`import { Runtime as july } from "july";`;
           (path as any).unshiftContainer("body", fn());

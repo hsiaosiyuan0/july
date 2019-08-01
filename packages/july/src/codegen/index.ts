@@ -63,10 +63,18 @@ export class Codegen extends AstVisitor {
 
   visitProg(node: Prog) {
     this.enterScope();
-    const prog = t.arrayExpression(node.body.map(stmt => this.visitStmt(stmt)));
-    prog.loc = node.loc;
+    if (node.body.length > 1) {
+      const line = node.loc.start.line;
+      const col = node.loc.start.column;
+      throw new Error(
+        `only one root element is permitted at line: ${line} column: ${col}`
+      );
+    }
+
+    const root = node.body[0] ? this.visitStmt(node.body[0]) : t.nullLiteral();
+    root.loc = node.loc;
     this.leaveScope();
-    return prog;
+    return root;
   }
 
   visitIfStmt(node: IfStatement) {
