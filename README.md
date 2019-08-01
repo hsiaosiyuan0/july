@@ -8,7 +8,7 @@ It's inspired by [Pug](https://github.com/pugjs/pug) and JSX to provide more cle
 
 ## Features
 
-* [x] Indent based language - Smaller then XML-link language
+* [x] Indent based language - Smaller than XML-link language
 * [x] Simple and Flexible syntax - Few semantics and Control-Flow Statements
 * [x] [Babel plugin](packages/babel/README.md) to compile to JavaScript
 * [x] [VSCode extension](packages/vscode/README.md)
