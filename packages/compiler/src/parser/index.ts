@@ -393,6 +393,11 @@ export class Parser {
   }
 
   parseTagStmt(indent: number = 0) {
+    if (indent === 0) {
+      const tok = this.lexer.peek();
+      indent = this.xIndent(tok);
+    }
+
     const loc = this.lexer.loc;
     const name = this.parseIdentifier();
     const tag = new TagStatement(loc, name, [], []);

@@ -1,4 +1,4 @@
-class Runtime {
+export class Runtime {
   static cond(test: any, cons: any[], alt: any) {
     alt = Array.isArray(alt) ? alt : [alt];
     return test ? cons : alt;
@@ -30,5 +30,3 @@ class Runtime {
     return ret;
   }
 }
-
-(global as any)["july"] = Runtime;

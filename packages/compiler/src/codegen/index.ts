@@ -53,9 +53,12 @@ export class Codegen extends AstVisitor {
     return this.symtab.scopes.get(this.scopeId)!;
   }
 
+  jsAst() {
+    return this.visitProg(this.ast);
+  }
+
   gen() {
-    const outAst = this.visitProg(this.ast);
-    return generate(outAst, { sourceMaps: true });
+    return generate(this.jsAst(), { sourceMaps: true });
   }
 
   visitProg(node: Prog) {

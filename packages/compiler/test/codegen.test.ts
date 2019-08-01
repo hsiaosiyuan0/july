@@ -4,7 +4,7 @@ import { Codegen, Symtab } from "../src";
 import util from "util";
 
 const log = function(stuff: any) {
-  if ("codegen" in process.env) util.inspect(stuff, true, null);
+  if ("codegen" in process.env) console.log(util.inspect(stuff, true, null));
 };
 
 function newParser(code: string) {

@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "commonjs",
+    "rootDir": "src",
     "outDir": "lib",
     "strict": true,
     "noUnusedLocals": true,
@@ -13,5 +14,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "composite": true
-  }
+  },
+  "include": ["src"]
 }

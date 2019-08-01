@@ -1,9 +1,8 @@
 {
-  "name": "july-compiler",
+  "name": "babel-plugin-july",
   "version": "1.0.0",
-  "description": "Compiler for July",
+  "description": "Babel plugin for July",
   "main": "lib/index.js",
-  "types": "lib/index.d.ts",
   "scripts": {
     "type-check": "tsc --noEmit --p tsconfig-build.json",
     "type-check:watch": "npm run type-check -- --watch",
@@ -25,16 +24,16 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-typescript": "^7.3.3",
-    "@types/jest": "^24.0.15",
+    "@types/jest": "^24.0.16",
     "@types/node": "^12.6.8",
     "jest": "^24.8.0",
     "ts-jest": "^24.0.2",
     "typescript": "^3.5.3"
   },
   "dependencies": {
-    "@babel/generator": "^7.5.5",
     "@babel/template": "^7.4.4",
-    "@babel/types": "^7.5.5"
+    "@babel/types": "^7.5.5",
+    "july-compiler": "^1.0.0"
   },
   "files": [
     "src/",
