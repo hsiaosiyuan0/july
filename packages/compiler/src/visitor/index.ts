@@ -25,7 +25,7 @@ import {
 } from "../parser/ast";
 
 export abstract class AstVisitor {
-  abstract visitProp(node: Prog): any;
+  abstract visitProg(node: Prog): any;
   abstract visitIfStmt(node: IfStatement): any;
   abstract visitForStmt(node: ForStatement): any;
   abstract visitBlockStmt(node: BlockStatement): any;

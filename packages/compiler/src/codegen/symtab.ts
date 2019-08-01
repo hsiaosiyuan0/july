@@ -50,7 +50,7 @@ export class Symtab extends AstVisitor {
     this.scope = this.scopes.get(i);
   }
 
-  visitProp(node: Prog) {
+  visitProg(node: Prog) {
     this.enterScope();
     node.body.forEach(stmt => this.visitStmt(stmt));
     this.leaveScope();

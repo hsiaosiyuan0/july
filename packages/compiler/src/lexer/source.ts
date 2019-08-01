@@ -15,6 +15,10 @@ export class Position {
     this.line = line;
     this.column = column;
   }
+
+  clone() {
+    return new Position(this.ofst, this.line, this.column);
+  }
 }
 
 export class Source {
@@ -107,6 +111,6 @@ export class SourceLoc {
   }
 
   clone() {
-    return Object.assign({}, this);
+    return new SourceLoc(this.source, this.start.clone(), this.end.clone());
   }
 }

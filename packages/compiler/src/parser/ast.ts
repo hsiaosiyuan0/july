@@ -128,7 +128,7 @@ export class UnaryExpression extends Expression {
 export class MemberExpression extends Expression {
   object: Expression;
   property: Expression;
-  computed: Boolean;
+  computed: boolean;
 
   constructor(
     loc: SourceLoc,
@@ -201,7 +201,7 @@ export class TernaryExpression extends Expression {
     cons: Expression,
     alt: Expression
   ) {
-    super(NodeType.ObjectExpression, loc);
+    super(NodeType.TernaryExpression, loc);
     this.test = test;
     this.cons = cons;
     this.alt = alt;

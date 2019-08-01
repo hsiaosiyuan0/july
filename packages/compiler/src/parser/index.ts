@@ -244,10 +244,12 @@ export class Parser {
     if (si - pi !== 1) this.raiseIndentErr(s);
   }
 
+  indentEq(a: Token, b: Token) {
+    return this.xIndent(a) === this.xIndent(b);
+  }
+
   assertIndentEq(a: Token, b: Token) {
-    const ai = this.xIndent(a);
-    const bi = this.xIndent(b);
-    if (ai !== bi) this.raiseIndentErr(b);
+    if (!this.indentEq(a, b)) this.raiseIndentErr(b);
   }
 
   parseIfStmt() {
@@ -262,8 +264,7 @@ export class Parser {
     if (ahead.matchKeyword(Keyword.Elf)) {
       this.assertIndentEq(tok, ahead);
       node.alt = this.parseIfStmt();
-    } else if (ahead.matchKeyword(Keyword.Else)) {
-      this.assertIndentEq(tok, ahead);
+    } else if (ahead.matchKeyword(Keyword.Else) && this.indentEq(tok, ahead)) {
       this.lexer.next();
       node.alt = this.parseBlockStmt(i + 1);
     }
@@ -290,8 +291,7 @@ export class Parser {
     const body = this.parseBlockStmt(i + 1);
     const node = new ForStatement(tok.loc.clone(), nameList, expr, body, null);
     const ahead = this.lexer.peek();
-    if (ahead.matchKeyword(Keyword.Else)) {
-      this.assertIndentEq(tok, ahead);
+    if (ahead.matchKeyword(Keyword.Else) && this.indentEq(tok, ahead)) {
       this.lexer.next();
       node.alt = this.parseBlockStmt(i + 1);
     }
@@ -348,6 +348,7 @@ export class Parser {
       node.boolean = false;
       node.value = this.parseTagAttrValue();
     } else if (tok.isStr()) {
+      this.lexer.next();
       node.boolean = false;
       node.value = new StringLiteral(tok.loc, tok.value);
     } else if (tok.matchSign(Sign.BraceL)) {

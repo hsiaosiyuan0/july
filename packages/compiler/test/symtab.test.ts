@@ -1,5 +1,4 @@
 import { Source, Lexer, Parser, Symtab } from "../src";
-import util from "util";
 
 function newParser(code: string) {
   const src = new Source(code);
@@ -18,7 +17,5 @@ for k, v in items
   const parser = newParser(code);
   const node = parser.parseProg();
   const symtab = new Symtab(() => true);
-  symtab.visitProp(node);
-
-  console.dir(util.inspect(symtab, true, null));
+  symtab.visitProg(node);
 });
