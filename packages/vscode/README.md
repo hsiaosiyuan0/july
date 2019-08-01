@@ -2,7 +2,7 @@
 
 Add supports for July - Yet another template engine.
 
-<img src="screenshot.png" width="400" />
+<img src="https://github.com/hsiaosiyuan0/july/raw/master/packages/vscode/screenshot.png" width="400" />
 
 ## Features
 
